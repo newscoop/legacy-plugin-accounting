@@ -85,6 +85,7 @@ $sortOptions = array(
     'Reads' => 'bypopularity',
     'CreateDate' => 'bycreationdate',
     'PublishDate' => 'bypublishdate',
+    'Status' => 'bystatus',
     'AccountingStatus' => $accountFieldSorting
 );
 

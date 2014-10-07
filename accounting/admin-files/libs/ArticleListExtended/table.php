@@ -136,7 +136,7 @@ tables['<?php echo $this->id; ?>'] = table.dataTable({
         <?php foreach ($this->orderBy as $column => $dir) { ?>
         [<?php echo $column; ?>, '<?php echo $dir; ?>'],
         <?php } ?>
-        [2, 'asc']
+        [19, 'desc']
     ],
     'oLanguage': {
         'oPaginate': {
@@ -183,7 +183,7 @@ tables['<?php echo $this->id; ?>'] = table.dataTable({
         },
         { // not sortable
             'bSortable': false,
-            'aTargets': [0, 1, 2, 4, 5, 6, 7, /*8*/, 9, 10, 11, 12, 13, 16, 17, 20, 21, 22]
+            'aTargets': [0, 1, 2, 4, 5, 6, 7, 10, 11, 12, 13, 16, 17, 20, 21, 22]
         },
         { // id
             'sClass': 'id',
