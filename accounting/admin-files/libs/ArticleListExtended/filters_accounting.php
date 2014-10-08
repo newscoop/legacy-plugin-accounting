@@ -77,10 +77,10 @@ require_once $GLOBALS['g_campsiteDir'] . '/classes/Author.php';
 <!-- /.smartlist-filters -->
 
 		<?php if (!self::$renderFiltersAccounting) { ?>
-<link rel="stylesheet" type="text/css" href="/js/select2/select2.css" />
+<link rel="stylesheet" type="text/css" href="<?= $Campsite['SUBDIR'] ?>/plugins/accounting/js/select2/select2.css" />
 <link type="text/css" href="<?= $Campsite['SUBDIR'] ?>/plugins/accounting/css/accounting.css" rel="stylesheet" />
-<script type="text/javascript" src="/js/jquery/jquery.mtz.monthpicker.js"></script>
-<script type="text/javascript" src="/js/select2/select2.js"></script>
+<script type="text/javascript" src="<?= $Campsite['SUBDIR'] ?>/plugins/accounting/js/jquery.mtz.monthpicker.js"></script>
+<script type="text/javascript" src="<?= $Campsite['SUBDIR'] ?>/plugins/accounting/js/select2/select2.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function() {

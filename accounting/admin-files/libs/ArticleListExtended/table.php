@@ -112,7 +112,9 @@ function sendOrder(form, hash)
             tables[hash].fnSort([[2, 'asc']]);
             tables[hash].fnDraw(true);
             flashMessage('<?php putGS('Order updated.'); ?>');
-        });
+        },
+        false,
+        '/admin/accounting/admin/json.php');
     return false;
 }
 --></script>
@@ -277,8 +279,7 @@ tables['<?php echo $this->id; ?>'] = table.dataTable({
                 'value': '<?php echo $this->$filter; ?>',
             });
         <?php }} ?>
-        // console.log(aoData);
-            callServer(['ArticleListExtended', 'doData'], aoData, fnCallback);
+            callServer(['ArticleListExtended', 'doData'], aoData, fnCallback, false, '/admin/accounting/admin/json.php');
     },
     'fnStateLoadCallback': function(oSettings, oData) {
         oData.sFilter = ''; // reset filter
