@@ -45,16 +45,20 @@ if (!defined('PLUGIN_ACCOUNTING_FUNCTIONS')) {
 
         mkdir($destDir, 0755);
 
-        foreach (
-            $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($sourceDir, RecursiveDirectoryIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::SELF_FIRST) as $item
-        ) {
-            if ($item->isDir()) {
-                mkdir($destDir . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
-            } else {
-                copy($item, $destDir . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+        try {
+            foreach (
+                $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($sourceDir, RecursiveDirectoryIterator::SKIP_DOTS),
+                RecursiveIteratorIterator::SELF_FIRST) as $item
+            ) {
+                if ($item->isDir()) {
+                    mkdir($destDir . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+                } else {
+                    copy($item, $destDir . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+                }
             }
+        } catch (\Exception $e) {
+            throw new \Exception('Could not install extension properly. Please check the permissions or copy the extension manually.');
         }
     }
 
