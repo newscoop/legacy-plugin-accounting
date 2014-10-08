@@ -39,13 +39,9 @@ if (isset($_POST['export_data'])) {
     }
 }
 
-// echo '<pre>$_REQUEST[\'args\']:'; var_dump($_REQUEST['args']); echo '<hr>'; exit;
-
 // set up
 $articlelist = new ArticleListExtended();
 $jsonData = $articlelist->doData($filters);
-
-// echo '<pre>$jsonData:'; var_dump($jsonData); echo '<hr>'; exit;
 
 // Create new PHPExcel object
 $objPHPExcel = new PHPExcel();

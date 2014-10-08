@@ -16,9 +16,9 @@ Adding switches to article types allow for easy storing additional information a
 For the plugin to work the following parameters need to be set.
 
 ```yaml
-    accounting:
-        transliterate_data: true
-        transliteration_language_id: 1
+accounting:
+    transliterate_data: true
+    transliteration_language_id: 1
 ```
 
 **transliterate_data**: enable translateration of data

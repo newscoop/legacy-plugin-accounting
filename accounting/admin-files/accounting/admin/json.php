@@ -1,9 +1,7 @@
 <?php
 /**
- * @package Campsite
- *
- * @author Petr Jasek <petr.jasek@sourcefabric.org>
- * @copyright 2010 Sourcefabric o.p.s.
+ * @author Mischa Gorinskat <mischa.gorinskat@sourcefabric.org>
+ * @copyright 2014 Sourcefabric o.p.s.
  * @license http://www.gnu.org/licenses/gpl.txt
  * @link http://www.sourcefabric.org
  */
@@ -12,8 +10,6 @@ header('Content-type: application/json');
 
 require_once WWW_DIR . '/classes/ServerRequest.php';
 
-// include valid callbacks files
-// TODO replace with Zend_Loader
 require_once WWW_DIR . '/classes/Extension/WidgetManager.php';
 require_once LIBS_DIR . '/ArticleList/ArticleList.php';
 require_once WWW_DIR . '/classes/Article.php';

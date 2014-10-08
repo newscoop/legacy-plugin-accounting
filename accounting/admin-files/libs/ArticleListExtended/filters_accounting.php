@@ -1,7 +1,5 @@
 <?php
 /**
- * @package Campsite
- *
  * @author Mischa Gorinskat <mischa.gorinskat@sourcefabric.org>
  * @copyright 2014 Sourcefabric o.p.s.
  * @license http://www.gnu.org/licenses/gpl.txt
@@ -109,7 +107,6 @@ $('.smartlist .filters select, .smartlist .filters input').not('.notrigger').cha
 // monthpicker for dates
 $('input.monthpicker').monthpicker({
     pattern: 'mm/yyyy',
-    // TODO: Add localizer
     monthNames: ['<?php putGs('Jan');?>', '<?php putGs('Feb');?>', '<?php putGs('Mar');?>',
     '<?php putGs('Apr');?>', '<?php putGs('May');?>', '<?php putGs('Jun');?>',
     '<?php putGs('Jul');?>', '<?php putGs('Aug');?>', '<?php putGs('Sep');?>',
@@ -142,15 +139,12 @@ $('input.datepicker').datepicker({
     onSelect: function() {
         var altField = $(this).datepicker('option', 'altField');
         if (altField) {
-            console.log('onSelect trigger change');
             $(altField).change();
         }
     }
-    // TODO: add max and min selection options for the dates
 }).change(function(){
     var altField = $(this).datepicker('option', 'altField');
     if (!$(this).val() && altField) {
-        console.log('change trigger change');
         $(altField).val('').change();
     }
 });

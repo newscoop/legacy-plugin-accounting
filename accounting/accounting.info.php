@@ -2,7 +2,7 @@
 
 $info = array(
     'name' => 'accounting',
-    'version' => '0.1.0',
+    'version' => '0.9.0',
     'label' => 'accounting',
     'description' => 'This plugin provides the accounting widget.',
     'menu' => array(
@@ -14,6 +14,9 @@ $info = array(
     'template_engine' => array(
     ),
     'localizer' => array(
+        'id' => 'plugin_accounting',
+        'path' => '/plugins/accounting/*/*/*/*/*',
+        'screen_name' => 'accounting'
     ),
     'no_menu_scripts' => array(
         '/accounting/admin/author/search.php',
@@ -59,31 +62,54 @@ if (!defined('PLUGIN_ACCOUNTING_FUNCTIONS')) {
     {
         $rootDir = dirname(__FILE__) .'/../../';
         $deleteDir = $rootDir . 'extensions/accounting';
-        $iterator = new RecursiveDirectoryIterator($deleteDir, RecursiveDirectoryIterator::SKIP_DOTS);
-        $files = new RecursiveIteratorIterator($iterator,
-                     RecursiveIteratorIterator::CHILD_FIRST);
+        try {
+            $iterator = new RecursiveDirectoryIterator($deleteDir, RecursiveDirectoryIterator::SKIP_DOTS);
+            $files = new RecursiveIteratorIterator($iterator,
+                         RecursiveIteratorIterator::CHILD_FIRST);
 
-        foreach($files as $file) {
-            if ($file->getFilename() === '.' || $file->getFilename() === '..') {
-                continue;
+            foreach($files as $file) {
+                if ($file->getFilename() === '.' || $file->getFilename() === '..') {
+                    continue;
+                }
+                if ($file->isDir()){
+                    rmdir($file->getRealPath());
+                } else {
+                    unlink($file->getRealPath());
+                }
             }
-            if ($file->isDir()){
-                rmdir($file->getRealPath());
-            } else {
-                unlink($file->getRealPath());
-            }
+            rmdir($deleteDir);
+        } catch (\Exception $e) {
         }
-        rmdir($deleteDir);
     }
 
     function plugin_accounting_uninstall()
     {
-        // Remove extension
+        $rootDir = dirname(__FILE__) .'/../../';
+        $deleteDir = $rootDir . 'extensions/accounting';
+        try {
+            $iterator = new RecursiveDirectoryIterator($deleteDir, RecursiveDirectoryIterator::SKIP_DOTS);
+            $files = new RecursiveIteratorIterator($iterator,
+                         RecursiveIteratorIterator::CHILD_FIRST);
+
+            foreach($files as $file) {
+                if ($file->getFilename() === '.' || $file->getFilename() === '..') {
+                    continue;
+                }
+                if ($file->isDir()){
+                    rmdir($file->getRealPath());
+                } else {
+                    unlink($file->getRealPath());
+                }
+            }
+            rmdir($deleteDir);
+        } catch (\Exception $e) {
+        }
     }
 
     function plugin_accounting_update()
     {
-        // Copy & overwrite extension
+        plugin_accounting_disable();
+        plugin_accounting_enable();
     }
 
     function plugin_accounting_init(&$p_context)
