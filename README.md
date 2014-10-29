@@ -32,12 +32,12 @@ For the plugin to work the following parameters need to be set.
 
 ```yaml
 accounting:
-    transliterate_data: true
+    transliterate_data: false
     transliteration_language_id: 1
 ```
 
-**transliterate_data**: enable translateration of data  
-**transliteration_language_id**: language id into which the data will be transliterated
+**transliterate_data** (bool): enable translateration of data  
+**transliteration_language_id** (int): language id into which the data will be transliterated
 
 For now this feature only works with author names, but it could be easily extended
 to include all values in Newscoop which can be translated. It would even be possible
