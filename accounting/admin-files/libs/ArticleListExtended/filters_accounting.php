@@ -14,7 +14,7 @@ require_once $GLOBALS['g_campsiteDir'] . '/classes/Author.php';
     <div class="left">
         <dl>
             <dt><label for="filter_author"><?php putGs('Author'); ?></label></dt>
-            <dd><input type="text" name="author" id="filter_author" class="select2 filters" data-contenturl="/admin/users/authors_ajax/search.php" style="width:250px;" /></dd>
+            <dd><input type="text" name="author" id="filter_author" class="select2 filters" data-contenturl="/admin/accounting/admin/author/search.php" style="width:250px;" /></dd>
         </dl>
     </div>
 
