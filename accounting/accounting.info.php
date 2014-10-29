@@ -2,7 +2,7 @@
 
 $info = array(
     'name' => 'accounting',
-    'version' => '0.9.0',
+    'version' => '0.9.1',
     'label' => 'accounting',
     'description' => 'This plugin provides the accounting widget.',
     'menu' => array(
