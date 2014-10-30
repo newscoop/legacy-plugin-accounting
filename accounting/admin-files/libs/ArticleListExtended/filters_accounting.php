@@ -8,12 +8,14 @@
 
 require_once $GLOBALS['g_campsiteDir'] . '/classes/Author.php';
 
+$translator = \Zend_Registry::get('container')->getService('translator');
+
 ?>
 <div class="filters">
-<fieldset class="filters"><legend><?php putGS('Filter'); ?></legend>
+<fieldset class="filters"><legend><?php echo $translator->trans('Filter', array(), 'library'); ?></legend>
     <div class="left">
         <dl>
-            <dt><label for="filter_author"><?php putGs('Author'); ?></label></dt>
+            <dt><label for="filter_author"><?php echo $translator->trans('Author', array(), 'library'); ?></label></dt>
             <dd><input type="text" name="author" id="filter_author" class="select2 filters" data-contenturl="/admin/users/authors_ajax/search.php" style="width:250px;" /></dd>
         </dl>
     </div>
@@ -24,21 +26,21 @@ require_once $GLOBALS['g_campsiteDir'] . '/classes/Author.php';
             <input id="publish_date_to" type="text" name="publish_date_to" class="filters" />
         </div>
         <dl>
-            <dt><label><?php putGs('Date selection'); ?></label></dt>
+            <dt><label><?php echo $translator->trans('Date selection', array(), 'plugin_accounting'); ?></label></dt>
             <dd>
                 <label>
-                    <?php putGs('Per month'); ?>
+                    <?php echo $translator->trans('Per month', array(), 'plugin_accounting'); ?>
                     <input type="radio" name="date_selection" value="monthly" class="date_selection" checked>
                 </label>
                 <label>
-                    <?php putGs('Specific dates'); ?>
+                    <?php echo $translator->trans('Specific dates', array(), 'plugin_accounting'); ?>
                     <input type="radio" name="date_selection" value="specific" class="date_selection">
                 </label>
             </dd>
         </dl>
 
         <dl class="date-option date-show-monthly">
-            <dt><label for="filter_date_monthly"><?php putGS('Publish date'); ?></label></dt>
+            <dt><label for="filter_date_monthly"><?php echo $translator->trans('Publish date', array(), 'plugin_accounting'); ?></label></dt>
             <dd>
                 <input id="filter_date_monthly" type="text" name="filter_date_monthly" class="monthpicker notrigger filters" />
             </dd>
@@ -46,30 +48,15 @@ require_once $GLOBALS['g_campsiteDir'] . '/classes/Author.php';
 
         <div class="date-option date-show-specific">
             <dl>
-                <dt><label for="filter_date_specific_start"><?php putGS('Publish date start'); ?></label></dt>
+                <dt><label for="filter_date_specific_start"><?php echo $translator->trans('Publish date start', array(), 'plugin_accounting'); ?></label></dt>
                 <dd><input id="filter_date_specific_start" type="text" name="filter_date_specific_start" class="datepicker notrigger filters" /></dd>
             </dl>
             <dl>
-                <dt><label for="filter_date_specific_end"><?php putGS('Publish date end'); ?></label></dt>
+                <dt><label for="filter_date_specific_end"><?php echo $translator->trans('Publish date end', array(), 'plugin_accounting'); ?></label></dt>
                 <dd><input id="filter_date_specific_end" type="text" name="filter_date_specific_end" class="datepicker notrigger filters" /></dd>
             </dl>
         </div>
     </div>
-
-<!--
-<div class="extra">
-<dl>
-	<dt><label for="filter_status"><?php putGS('Status'); ?></label></dt>
-	<dd><select name="workflow_status">
-		<option value=""><?php putGS('All'); ?></option>
-		<option value="published"><?php putGS('Published'); ?></option>
-		<option value="new"><?php putGS('New'); ?></option>
-		<option value="submitted"><?php putGS('Submitted'); ?></option>
-		<option value="withissue"><?php putGS('Publish with issue'); ?></option>
-	</select></dd>
-</dl>
-</div>
--->
 </fieldset>
 </div>
 <!-- /.smartlist-filters -->
@@ -107,10 +94,20 @@ $('.smartlist .filters select, .smartlist .filters input').not('.notrigger').cha
 // monthpicker for dates
 $('input.monthpicker').monthpicker({
     pattern: 'mm/yyyy',
-    monthNames: ['<?php putGs('Jan');?>', '<?php putGs('Feb');?>', '<?php putGs('Mar');?>',
-    '<?php putGs('Apr');?>', '<?php putGs('May');?>', '<?php putGs('Jun');?>',
-    '<?php putGs('Jul');?>', '<?php putGs('Aug');?>', '<?php putGs('Sep');?>',
-    '<?php putGs('Oct');?>', '<?php putGs('Nov');?>', '<?php putGs('Dec');?>']
+    monthNames: [
+        '<?php echo $translator->trans('Jan', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Feb', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Mar', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Apr', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('May', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Jun', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Jul', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Aug', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Sep', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Oct', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Nov', array(), 'plugin_accounting');?>',
+        '<?php echo $translator->trans('Dec', array(), 'plugin_accounting');?>'
+    ]
 });
 
 $('#filter_date_monthly')
@@ -160,7 +157,7 @@ $('fieldset.filters .extra').each(function() {
         .appendTo(extra)
         .each(function() { // init options
             var select = $(this);
-            $('<option value=""><?php putGS('Filter by...'); ?></option>')
+            $('<option value=""><?php echo $translator->trans('Filter by...'); ?></option>')
                 .appendTo(select);
             $('dl dt label', extra).each(function() {
                 var label = $(this).text();
@@ -200,7 +197,7 @@ $('fieldset.filters').each(function() {
 
     // reset all button
     // TODO: proper reset all values and clear textfields
-    var resetMsg = '<?php putGS('Reset all filters'); ?>';
+    var resetMsg = '<?php echo $translator->trans('Reset all filters'); ?>';
     $('<a href="#" class="reset" title="'+resetMsg+'">'+resetMsg+'</a>')
         .appendTo(divLeft)
         .click(function() {
@@ -262,9 +259,9 @@ $('input.select2').each(function() {
         id: idProcessor,
         formatResult: resultFormatProcessor,
         formatSelection: selectionFormatProcessor,
-        formatNoMatches: function() { return "<?php putGs('No matches.'); ?>"; },
-        formatSearching: function() { return "<?php putGs('Searching...'); ?>"; },
-        formatInputTooShort: function() { return  "<?php putGs('Minimum input of characters: $1', 1); ?>"; }
+        formatNoMatches: function() { return "<?php echo $translator->trans('No matches.'); ?>"; },
+        formatSearching: function() { return "<?php echo $translator->trans('Searching...'); ?>"; },
+        formatInputTooShort: function() { return  "<?php echo $translator->trans('Minimum input of characters: $1', array(1 => '1'), 'plugins_accounting'); ?>"; }
     });
 });
 

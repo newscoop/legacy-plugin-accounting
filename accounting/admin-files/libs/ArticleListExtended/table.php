@@ -5,8 +5,8 @@
  * @license http://www.gnu.org/licenses/gpl.txt
  * @link http://www.sourcefabric.org
  */
+$translator = \Zend_Registry::get('container')->getService('translator');
 ?>
-
 <script>
 jQuery.fn.dataTableExt.oApi.fnSetFilteringDelay = function ( oSettings, iDelay ) {
     /*
@@ -69,7 +69,7 @@ jQuery.fn.dataTableExt.oApi.fnSetFilteringDelay = function ( oSettings, iDelay )
 </thead>
 <tbody>
 <?php if ($this->items === NULL) { ?>
-    <tr><td colspan="<?php echo sizeof($this->cols); ?>"><?php putGS('Loading data'); ?></td></tr>
+    <tr><td colspan="<?php echo sizeof($this->cols); ?>"><?php echo $translator->trans('Loading data'); ?></td></tr>
 <?php } else if (!empty($this->items)) { ?>
     <?php foreach ($this->items as $item) { ?>
     <tr>
@@ -89,7 +89,7 @@ jQuery.fn.dataTableExt.oApi.fnSetFilteringDelay = function ( oSettings, iDelay )
     <input type="hidden" name="order" value="" />
 
 <fieldset class="buttons">
-    <input id="button-set-order" type="submit" name="Save" value="<?php putGS('Save order'); ?>" />
+    <input id="button-set-order" type="submit" name="Save" value="<?php echo $translator->trans('Save order'); ?>" />
 </fieldset>
 </form>
 <div style="clear: both"></div>
@@ -109,10 +109,10 @@ function sendOrder(form, hash)
         ], function(data) {
             tables[hash].fnSort([[2, 'asc']]);
             tables[hash].fnDraw(true);
-            flashMessage('<?php putGS('Order updated.'); ?>');
+            flashMessage('<?php echo $translator->trans('Order updated.'); ?>');
         },
         false,
-        '/admin/accounting/admin/json.php');
+        '/admin/accounting/json.php');
     return false;
 }
 --></script>
@@ -140,17 +140,17 @@ tables['<?php echo $this->id; ?>'] = table.dataTable({
     ],
     'oLanguage': {
         'oPaginate': {
-            'sFirst': '<?php putGS('First'); ?>',
-            'sNext': '<?php putGS('Next'); ?>',
-            'sPrevious': '<?php putGS('Previous'); ?>',
-            'sLast': '<?php putGS('Last'); ?>',
+            'sFirst': '<?php echo $translator->trans('First'); ?>',
+            'sNext': '<?php echo $translator->trans('Next'); ?>',
+            'sPrevious': '<?php echo $translator->trans('Previous'); ?>',
+            'sLast': '<?php echo $translator->trans('Last'); ?>',
         },
-        'sZeroRecords': '<?php putGS('No records found.'); ?>',
-        'sSearch': '<?php putGS('Search'); ?>:',
-        'sInfo': '<?php putGS('Showing _START_ to _END_ of _TOTAL_ entries'); ?>',
-        'sEmpty': '<?php putGS('No entries to show'); ?>',
-        'sInfoFiltered': '<?php putGS(' - filtering from _MAX_ records'); ?>',
-        'sLengthMenu': '<?php putGS('Display _MENU_ records'); ?>',
+        'sZeroRecords': '<?php echo $translator->trans('No records found.'); ?>',
+        'sSearch': '<?php echo $translator->trans('Search'); ?>:',
+        'sInfo': '<?php echo $translator->trans('Showing _START_ to _END_ of _TOTAL_ entries'); ?>',
+        'sEmpty': '<?php echo $translator->trans('No entries to show'); ?>',
+        'sInfoFiltered': '<?php echo $translator->trans(' - filtering from _MAX_ records'); ?>',
+        'sLengthMenu': '<?php echo $translator->trans('Display _MENU_ records'); ?>',
         'sInfoEmpty': '',
     },
     'aoColumnDefs': [
@@ -165,12 +165,12 @@ tables['<?php echo $this->id; ?>'] = table.dataTable({
             'fnRender': function(obj) {
                 switch (obj.aData[9]) {
                     case 'Y':
-                        return '<?php putGS('Published'); ?>';
+                        return '<?php echo $translator->trans('Published'); ?>';
                     case 'N':
-                        return '<?php putGS('New'); ?>';
+                        return '<?php echo $translator->trans('New'); ?>';
                     case 'S':
-                        return '<?php putGS('Submitted'); ?>';
-                    case 'M': return '<?php putGS('Publish with issue'); ?>';
+                        return '<?php echo $translator->trans('Submitted'); ?>';
+                    case 'M': return '<?php echo $translator->trans('Publish with issue'); ?>';
                 }
             },
             'aTargets': [9]
@@ -277,7 +277,7 @@ tables['<?php echo $this->id; ?>'] = table.dataTable({
                 'value': '<?php echo $this->$filter; ?>',
             });
         <?php }} ?>
-            callServer(['ArticleListExtended', 'doData'], aoData, fnCallback, false, '/admin/accounting/admin/json.php');
+            callServer(['ArticleListExtended', 'doData'], aoData, fnCallback, false, '/admin/accounting/json.php');
     },
     'fnStateLoadCallback': function(oSettings, oData) {
         oData.sFilter = ''; // reset filter
@@ -290,7 +290,7 @@ tables['<?php echo $this->id; ?>'] = table.dataTable({
     <?php if ($this->colVis) { ?>
     'oColVis': { // disable Show/hide column
         'aiExclude': [0, 1, 2],
-        'buttonText': '<?php putGS('Show / hide columns'); ?>',
+        'buttonText': '<?php echo $translator->trans('Show / hide columns'); ?>',
     },
     <?php } ?>
     <?php if ($this->order) { ?>
@@ -333,7 +333,7 @@ dataTableSettingsExport = function(tableId, fnCallback) {
 }
 
 <?php if ($this->items === null && !isset($this->type)) { ?>
-$('<input type="checkbox" name="showtype" value="with_filtered" id="display_filtered_types_<?php echo $this->id; ?>" /> <label for="display_filtered_types_<?php echo $this->id; ?>"><?php putGS("Display articles of filtered types"); ?></label>')
+$('<input type="checkbox" name="showtype" value="with_filtered" id="display_filtered_types_<?php echo $this->id; ?>" /> <label for="display_filtered_types_<?php echo $this->id; ?>"><?php echo $translator->trans("Display articles of filtered types"); ?></label>')
     .appendTo('#filter_type_<?php echo $this->id; ?>');
 $('#filter_type_<?php echo $this->id; ?>').css('float', 'right');
 $('#filter_type_<?php echo $this->id; ?>').css('margin-right', '20px');
