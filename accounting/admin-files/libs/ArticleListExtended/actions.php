@@ -9,11 +9,11 @@
 <div class="actions">
 <?php
 	global $g_user;
+    $translator = \Zend_Registry::get('container')->getService('translator');
 ?>
 <fieldset class="actions">
-    <legend><?php putGS('Select action'); ?></legend>
-    <!--<button id="exportSelection"><?php putGS('Export selection'); ?></button>-->
-    <button id="exportAll"><?php putGS('Export all'); ?></button>
+    <legend><?php echo $translator->trans('Select action'); ?></legend>
+    <button id="exportAll"><?php echo $translator->trans('Export all', array(), 'plugin_accounting'); ?></button>
 </fieldset>
 </div><!-- /.smartlist-actions -->
 

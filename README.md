@@ -1,7 +1,9 @@
 # Accounting plugin
 
 The plugin contains a widget which allows for filtering articles by authors,
-publication dates and exporting this as an .xls file.
+publication dates and exporting this as an .xls file. 
+
+This plugin is compatible with Newscop 4.3 and above.
 
 ### Featurelist
 * Filter article lists by author (via autocomplete)
