@@ -2,7 +2,7 @@
 
 $info = array(
     'name' => 'accounting',
-    'version' => '0.9.2',
+    'version' => '0.10.0',
     'label' => 'accounting',
     'description' => 'This plugin provides the accounting widget.',
     'menu' => array(
@@ -19,9 +19,9 @@ $info = array(
         'screen_name' => 'accounting'
     ),
     'no_menu_scripts' => array(
-        '/accounting/admin/author/search.php',
-        '/accounting/admin/export.php',
-        '/accounting/admin/json.php'
+        '/accounting/author/search.php',
+        '/accounting/export.php',
+        '/accounting/json.php'
     ),
     'install' => 'plugin_accounting_install',
     'enable' => 'plugin_accounting_enable',

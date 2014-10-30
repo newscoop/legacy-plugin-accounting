@@ -6,7 +6,6 @@
  * @link http://www.sourcefabric.org
  */
 
-require_once($GLOBALS['g_campsiteDir'].'/classes/SystemPref.php');
 require_once WWW_DIR . '/library/Newscoop/Version.php';
 require_once WWW_DIR . '/plugins/accounting/admin-files/libs/ArticleListExtended/ArticleListExtended.php';
 require_once WWW_DIR . '/plugins/accounting/external/Classes/PHPExcel.php';

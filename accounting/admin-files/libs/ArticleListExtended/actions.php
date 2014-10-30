@@ -27,7 +27,7 @@ $(document).ready(function() {
         dataTableSettingsExport(smartlistId, function(data) {
             var object = this;
             object.time = new Date().getTime();
-            object.form = $('<form action="/admin/accounting/admin/export.php" target="iframe'+object.time+'" method="post" style="display:none;" id="form'+object.time+'"></form>');
+            object.form = $('<form action="/admin/accounting/export.php" target="iframe'+object.time+'" method="post" style="display:none;" id="form'+object.time+'"></form>');
 
             $("<input type='hidden' />")
              .attr("name", 'export_data')
