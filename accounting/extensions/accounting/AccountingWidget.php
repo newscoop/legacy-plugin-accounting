@@ -6,7 +6,6 @@
  * @link http://www.sourcefabric.org
  */
 
-require_once($GLOBALS['g_campsiteDir'].'/classes/SystemPref.php');
 require_once WWW_DIR . '/plugins/accounting/admin-files/libs/ArticleListExtended/ArticleListExtended.php';
 
 /**
@@ -17,21 +16,18 @@ class AccountingWidget extends Widget
 {
     public function __construct()
     {
-        $this->title = getGS('Accounting');
+        $translator = \Zend_Registry::get('container')->getService('translator');
+        $this->title = $translator->trans('Accounting', array(), 'plugin_accounting');
     }
 
     public function render()
     {
-        camp_load_translation_strings('articles');
-
         $f_author_id = Input::Get('f_author_id', 'int', null);
 
         $f_month_id = Input::Get('f_month_f', 'int', null);
 
         $f_date_start = Input::Get('f_date_start', 'int', null);
         $f_date_end = Input::Get('f_date_end', 'int', null);
-
-        // camp_html_content_top(getGS('Search'), NULL);
 
         // set up
         $articlelist = new ArticleListExtended();

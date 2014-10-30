@@ -56,32 +56,34 @@ class ArticleListExtended extends ArticleList
 		// Get parameters from config file
 		$this->parameters = \Zend_Registry::get('container')->getParameter('accounting');
 
+		$translator = \Zend_Registry::get('container')->getService('translator');
+
 		// column titles
 		$this->cols = array(
             'Number' => NULL,
-            'Language' => getGS('Language'),
-            'Order' => getGS('Order'),
-            'Name' => getGS('Title'),
-            'Section' => getGS('Section'),
-            'Webcode' => getGS('Webcode'),
-            'Type' => getGS('Type'),
-            'Created' => getGS('Created by'),
-            'Author' => getGS('Author'),
-            'Status' => getGS('Status'),
-            'OnFrontPage' => getGS('On Front Page'),
-            'OnSectionPage' => getGS('On Section Page'),
-            'Images' => getGS('Images'),
-            'Topics' => getGS('Topics'),
-            'Comments' => getGS('Comments'),
-            'Reads' => getGS('Reads'),
-            'UseMap' => getGS('Use Map'),
-            'Locations' => getGS('Locations'),
-            'CreateDate' => getGS('Create Date'),
-            'PublishDate' => getGS('Publish Date'),
-            'LastModified' => getGS('Last Modified'),
-		    'Preview' => getGS('Preview'),
-		    'Translate' => getGS('Translate'),
-		    'AccountingStatus' => getGS('Accounting status'),
+            'Language' => $translator->trans('Language'),
+            'Order' => $translator->trans('Order'),
+            'Name' => $translator->trans('Title'),
+            'Section' => $translator->trans('Section'),
+            'Webcode' => $translator->trans('Webcode'),
+            'Type' => $translator->trans('Type'),
+            'Created' => $translator->trans('Created by'),
+            'Author' => $translator->trans('Author'),
+            'Status' => $translator->trans('Status'),
+            'OnFrontPage' => $translator->trans('On Front Page'),
+            'OnSectionPage' => $translator->trans('On Section Page'),
+            'Images' => $translator->trans('Images'),
+            'Topics' => $translator->trans('Topics'),
+            'Comments' => $translator->trans('Comments'),
+            'Reads' => $translator->trans('Reads'),
+            'UseMap' => $translator->trans('Use Map'),
+            'Locations' => $translator->trans('Locations'),
+            'CreateDate' => $translator->trans('Create Date'),
+            'PublishDate' => $translator->trans('Publish Date'),
+            'LastModified' => $translator->trans('Last Modified'),
+		    'Preview' => $translator->trans('Preview'),
+		    'Translate' => $translator->trans('Translate'),
+		    'AccountingStatus' => $translator->trans('Accounting status', array(), 'plugin_accounting'),
 		);
 	}
 
@@ -188,6 +190,8 @@ class ArticleListExtended extends ArticleList
 	{
 		global $g_user, $Campsite;
 
+		$translator = \Zend_Registry::get('container')->getService('translator');
+
 		$articleLinkParams = '?f_publication_id=' . $article->getPublicationId()
 		. '&amp;f_issue_number=' . $article->getIssueNumber() . '&amp;f_section_number=' . $article->getSectionNumber()
 		. '&amp;f_article_number=' . $article->getArticleNumber() . '&amp;f_language_id=' . $article->getLanguageId()
@@ -196,9 +200,9 @@ class ArticleListExtended extends ArticleList
         . '&amp;f_article_code=' . $article->getArticleNumber() . '_' . $article->getLanguageId();
 		$articleLink = $Campsite['WEBSITE_URL'].'/admin/articles/edit.php' . $articleLinkParams;
 		$previewLink = $Campsite['WEBSITE_URL'].'/admin/articles/preview.php' . $articleLinkParams;
-		$htmlPreviewLink = '<a href="'.$previewLink.'" target="_blank" title="'.getGS('Preview').'">'.getGS('Preview').'</a>';
+		$htmlPreviewLink = '<a href="'.$previewLink.'" target="_blank" title="'.$translator->trans('Preview').'">'.$translator->trans('Preview').'</a>';
         $translateLink = $Campsite['WEBSITE_URL'].'/admin/articles/translate.php' . $articleLinkParamsTranslate;
-        $htmlTranslateLink = '<a href="'.$translateLink.'" target="_blank" title="'.getGS('Translate').'">'.getGS('Translate').'</a>';
+        $htmlTranslateLink = '<a href="'.$translateLink.'" target="_blank" title="'.$translator->trans('Translate').'">'.$translator->trans('Translate').'</a>';
 
 		$lockInfo = '';
 		$lockHighlight = false;
@@ -206,12 +210,12 @@ class ArticleListExtended extends ArticleList
 		if ($article->isLocked() && ($timeDiff['days'] <= 0)) {
 			$lockUser = new User($article->getLockedByUser());
 			if ($timeDiff['hours'] > 0) {
-				$lockInfo = getGS('The article has been locked by $1 ($2) $3 hour(s) and $4 minute(s) ago.',
+				$lockInfo = $translator->trans('The article has been locked by $1 ($2) $3 hour(s) and $4 minute(s) ago.',
 				htmlspecialchars($lockUser->getRealName()),
 				htmlspecialchars($lockUser->getUserName()),
 				$timeDiff['hours'], $timeDiff['minutes']);
 			} else {
-				$lockInfo = getGS('The article has been locked by $1 ($2) $3 minute(s) ago.',
+				$lockInfo = $translator->trans('The article has been locked by $1 ($2) $3 minute(s) ago.',
 				htmlspecialchars($lockUser->getRealName()),
 				htmlspecialchars($lockUser->getUserName()),
 				$timeDiff['minutes']);
@@ -247,8 +251,8 @@ class ArticleListExtended extends ArticleList
 			$authors[] = $articleAuthors[0];
 		}
 
-		$onFrontPage = $article->onFrontPage() ? getGS('Yes') : getGS('No');
-		$onSectionPage = $article->onSectionPage() ? getGS('Yes') : getGS('No');
+		$onFrontPage = $article->onFrontPage() ? $translator->trans('Yes') : $translator->trans('No');
+		$onSectionPage = $article->onSectionPage() ? $translator->trans('Yes') : $translator->trans('No');
 
 		$imagesNo = (int) ArticleImage::GetImagesByArticleNumber($article->getArticleNumber(), true);
 		$topicsNo = (int) ArticleTopic::GetArticleTopics($article->getArticleNumber(), true);
@@ -283,7 +287,7 @@ class ArticleListExtended extends ArticleList
 		    sprintf('%s <a href="%s" title="%s %s">%s</a>',
 		    $article->isLocked() ? '<span class="ui-icon ui-icon-locked' . (!$lockHighlight ? ' current-user' : '' ) . '" title="' . $lockInfo . '"></span>' : '',
 		    $articleLink,
-		    getGS('Edit'), htmlspecialchars($article->getName() . " ({$article->getLanguageName()})"),
+		    $translator->trans('Edit'), htmlspecialchars($article->getName() . " ({$article->getLanguageName()})"),
 		    htmlspecialchars($article->getName() . (empty($_REQUEST['language']) ? " ({$language->getCode()})" : ''))), // /sprintf
 		    htmlspecialchars($article->getSection()->getName()),
             $article->getWebcode(),
@@ -297,7 +301,7 @@ class ArticleListExtended extends ArticleList
 		    $topicsNo,
 		    $commentsNo,
 		    (int) $article->getReads(),
-		    Geo_Map::GetArticleMapId($article) != NULL ? getGS('Yes') : getGS('No'),
+		    Geo_Map::GetArticleMapId($article) != NULL ? $translator->trans('Yes') : $translator->trans('No'),
 		    (int) sizeof(Geo_Map::GetLocationsByArticle($article)),
 		    $article->getCreationDate(),
 		    $article->getPublishDate(),
