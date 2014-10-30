@@ -16,7 +16,7 @@ $translator = \Zend_Registry::get('container')->getService('translator');
     <div class="left">
         <dl>
             <dt><label for="filter_author"><?php echo $translator->trans('Author', array(), 'library'); ?></label></dt>
-            <dd><input type="text" name="author" id="filter_author" class="select2 filters" data-contenturl="/admin/accounting/admin/author/search.php" style="width:250px;" /></dd>
+            <dd><input type="text" name="author" id="filter_author" class="select2 filters" data-contenturl="/admin/accounting/author/search.php" style="width:250px;" /></dd>
         </dl>
     </div>
 
