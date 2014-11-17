@@ -24,6 +24,10 @@ if (isset($_POST['export_data'])) {
             case 'iDisplayLength':
                 $data['value'] = '10000';
             break;
+            case 'number':
+                // Remove language
+                $filterArticles = explode(',', preg_replace('/(\d+)_\d+/', '$1', $data['value']));
+            break;
             case 'author';
                 $printAuthor = $data['value'];
             break;
@@ -80,6 +84,10 @@ foreach ($columns AS $column) {
 $iRow++;
 
 foreach ($articles as $article) {
+
+    if (!in_array($article[0], $filterArticles)) {
+        continue;
+    }
 
     $sColumn = 'a';
 

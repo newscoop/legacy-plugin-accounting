@@ -48,8 +48,13 @@ $fields = array(
 foreach ($filters as $name => $opts) {
     if (isset($_REQUEST[$name])
     && (!empty($_REQUEST[$name]) || $_REQUEST[$name] === 0)) {
+
         $field = !empty($fields[$name]) ? $fields[$name] : $name;
-        $articlesParams[] = new ComparisonOperation($field, new Operator($opts[0], $opts[1]), $_REQUEST[$name]);
+        if ($name == 'number') {
+            $articlesParams[] = new ComparisonOperation($field, 'IN', $_REQUEST[$name]);
+        } else {
+            $articlesParams[] = new ComparisonOperation($field, new Operator($opts[0], $opts[1]), $_REQUEST[$name]);
+        }
     }
 }
 
