@@ -25,16 +25,16 @@ $translator = \Zend_Registry::get('container')->getService('translator');
             <input id="publish_date_from" type="text" name="publish_date_from" class="filters" />
             <input id="publish_date_to" type="text" name="publish_date_to" class="filters" />
         </div>
-        <dl>
+        <dl class="date-selection">
             <dt><label><?php echo $translator->trans('Date selection', array(), 'plugin_accounting'); ?></label></dt>
             <dd>
                 <label>
-                    <?php echo $translator->trans('Per month', array(), 'plugin_accounting'); ?>
                     <input type="radio" name="date_selection" value="monthly" class="date_selection" checked>
+                    <?php echo $translator->trans('Per month', array(), 'plugin_accounting'); ?>
                 </label>
                 <label>
-                    <?php echo $translator->trans('Specific dates', array(), 'plugin_accounting'); ?>
                     <input type="radio" name="date_selection" value="specific" class="date_selection">
+                    <?php echo $translator->trans('Specific dates', array(), 'plugin_accounting'); ?>
                 </label>
             </dd>
         </dl>
@@ -192,14 +192,15 @@ $('fieldset.filters .extra').each(function() {
 $('fieldset.filters').each(function() {
     var fieldset = $(this);
     var divLeft = fieldset.find('div.left');
+    var divRight = fieldset.find('div.right');
     var smartlist = fieldset.closest('.smartlist');
     var smartlistId = smartlist.attr('id').split('-')[1];
 
     // reset all button
     // TODO: proper reset all values and clear textfields
     var resetMsg = '<?php echo $translator->trans('Reset all filters'); ?>';
-    $('<a href="#" class="reset" title="'+resetMsg+'">'+resetMsg+'</a>')
-        .appendTo(divLeft)
+    $('<a href="#" class="reset button" title="'+resetMsg+'">'+resetMsg+'</a>')
+        .appendTo(divRight)
         .click(function() {
             // reset extra filters
             $('.extra dl', fieldset).each(function() {
