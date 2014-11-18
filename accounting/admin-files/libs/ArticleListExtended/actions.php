@@ -13,35 +13,39 @@
 ?>
 <fieldset class="actions accounting-actions">
     <legend><?php echo $translator->trans('Select action'); ?></legend>
+    <small id="exportHelp" data-original-title="" title="" class="button-help">(?)</small>
     <label>
         <button id="exportSelect" class="button"><?php
             echo $translator->trans('button_export_selected', array(), 'plugin_accounting');
-        ?></button><small id="exportSelectedHelp" data-original-title="" title="" class="button-help">(?)</small>
+        ?></button>
     </label>
     <label>
         <button id="exportAll" class="button"><?php
             echo $translator->trans('button_export_all', array(), 'plugin_accounting');
-        ?></button><small id="exportAllHelp" data-original-title="" title="" class="button-help">(?)</small>
+        ?></button>
     </label>
 </fieldset>
 </div><!-- /.smartlist-actions -->
 
 <?php if (!self::$renderActions) { ?>
-<style type="text/css">
-
-</style>
 <script src="/bundles/newscoopnewscoop/js/popover.js" type="text/javascript"></script>
 <script type="text/javascript">
 
 function popover(target, content) {
     target.popover({
         trigger: 'hover',
-        content : content
+        content : content,
+        html: true,
+        placement: 'left',
+        container: 'body'
     });
 };
 
-popover($('#exportSelectedHelp'), '<?php echo htmlentities($translator->trans('button_export_selected_help', array(), 'plugin_accounting'), ENT_QUOTES, 'UTF-8'); ?>');
-popover($('#exportAllHelp'), '<?php echo htmlentities($translator->trans('button_export_all_help', array(), 'plugin_accounting'), ENT_QUOTES, 'UTF-8'); ?>');
+popover($('#exportHelp'), '<?php
+    echo $translator->trans('export_help_line1', array(), 'plugin_accounting');
+    echo '<br>';
+    echo $translator->trans('export_help_line2', array(), 'plugin_accounting');
+ ?>');
 
 $(document).ready(function() {
 
