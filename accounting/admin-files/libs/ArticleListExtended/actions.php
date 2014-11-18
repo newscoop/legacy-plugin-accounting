@@ -11,23 +11,38 @@
 	global $g_user;
     $translator = \Zend_Registry::get('container')->getService('translator');
 ?>
-<fieldset class="actions">
+<fieldset class="actions accounting-actions">
     <legend><?php echo $translator->trans('Select action'); ?></legend>
-    <button id="exportSelect" title="<?php
-        echo htmlentities($translator->trans('button_export_selected_help', array(), 'plugin_accounting'), ENT_QUOTES, 'UTF-8');
-    ?>"><?php
-        echo $translator->trans('button_export_selected', array(), 'plugin_accounting');
-    ?></button>
-    <button id="exportAll" title="<?php
-        echo htmlentities($translator->trans('button_export_all_help', array(), 'plugin_accounting'), ENT_QUOTES, 'UTF-8');
-    ?>"><?php
-        echo $translator->trans('button_export_all', array(), 'plugin_accounting');
-    ?></button>
+    <label>
+        <button id="exportSelect" class="button"><?php
+            echo $translator->trans('button_export_selected', array(), 'plugin_accounting');
+        ?></button><small id="exportSelectedHelp" data-original-title="" title="" class="button-help">(?)</small>
+    </label>
+    <label>
+        <button id="exportAll" class="button"><?php
+            echo $translator->trans('button_export_all', array(), 'plugin_accounting');
+        ?></button><small id="exportAllHelp" data-original-title="" title="" class="button-help">(?)</small>
+    </label>
 </fieldset>
 </div><!-- /.smartlist-actions -->
 
 <?php if (!self::$renderActions) { ?>
+<style type="text/css">
+
+</style>
+<script src="/bundles/newscoopnewscoop/js/popover.js" type="text/javascript"></script>
 <script type="text/javascript">
+
+function popover(target, content) {
+    target.popover({
+        trigger: 'hover',
+        content : content
+    });
+};
+
+popover($('#exportSelectedHelp'), '<?php echo htmlentities($translator->trans('button_export_selected_help', array(), 'plugin_accounting'), ENT_QUOTES, 'UTF-8'); ?>');
+popover($('#exportAllHelp'), '<?php echo htmlentities($translator->trans('button_export_all_help', array(), 'plugin_accounting'), ENT_QUOTES, 'UTF-8'); ?>');
+
 $(document).ready(function() {
 
     $('#exportAll, #exportSelect').click(function() {
