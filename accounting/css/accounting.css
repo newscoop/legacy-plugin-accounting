@@ -21,6 +21,10 @@ div.right .date-show-specific {
     margin-top: 0px;
 }
 
+fieldset.filters, fieldset.actions {
+    margin: 16px 10px !important;
+}
+
 fieldset.filters dt label {
     font-weight: bold;
     display: block;
