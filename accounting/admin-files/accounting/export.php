@@ -26,7 +26,11 @@ if (isset($_POST['export_data'])) {
             break;
             case 'number':
                 // Remove language
-                $filterArticles = explode(',', preg_replace('/(\d+)_\d+/', '$1', $data['value']));
+                if (!empty($data['value'])) {
+                    $filterArticles = explode(',', preg_replace('/(\d+)_\d+/', '$1', $data['value']));
+                } else {
+                    $filterArticles = array();
+                }
             break;
             case 'author';
                 $printAuthor = $data['value'];
@@ -82,10 +86,11 @@ foreach ($columns AS $column) {
     $sColumn++;
 }
 $iRow++;
+$filter = count($filterArticles) > 0;
 
 foreach ($articles as $article) {
 
-    if (!in_array($article[0], $filterArticles)) {
+    if ($filter && !in_array($article[0], $filterArticles)) {
         continue;
     }
 
