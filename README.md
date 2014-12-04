@@ -44,3 +44,4 @@ accounting:
 For now this feature only works with author names, but it could be easily extended
 to include all values in Newscoop which can be translated. It would even be possible
 to add transliteration to values which are not translatable by default.
+
