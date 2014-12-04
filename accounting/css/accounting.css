@@ -1,0 +1,8 @@
+div.left {
+    float: left;
+    padding-right: 40px;
+}
+
+div.right {
+    float: left;
+}
