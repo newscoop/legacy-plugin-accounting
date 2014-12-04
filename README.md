@@ -3,6 +3,8 @@
 The plugin contains a widget which allows for filtering articles by authors,
 publication dates and exporting this as an .xls file.
 
+This plugin is compatible with Newscop 4.2.
+
 ### Featurelist
 * Filter article lists by author (via autocomplete)
 * Filter article list by publication date, via month selection or via manual start and end date selection
@@ -42,3 +44,4 @@ accounting:
 For now this feature only works with author names, but it could be easily extended
 to include all values in Newscoop which can be translated. It would even be possible
 to add transliteration to values which are not translatable by default.
+
