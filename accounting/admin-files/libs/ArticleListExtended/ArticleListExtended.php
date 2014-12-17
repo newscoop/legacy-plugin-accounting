@@ -210,15 +210,24 @@ class ArticleListExtended extends ArticleList
 		if ($article->isLocked() && ($timeDiff['days'] <= 0)) {
 			$lockUser = new User($article->getLockedByUser());
 			if ($timeDiff['hours'] > 0) {
-				$lockInfo = $translator->trans('The article has been locked by $1 ($2) $3 hour(s) and $4 minute(s) ago.',
-				htmlspecialchars($lockUser->getRealName()),
-				htmlspecialchars($lockUser->getUserName()),
-				$timeDiff['hours'], $timeDiff['minutes']);
+				$lockInfo = $translator->trans(
+					'The article has been locked by $1 ($2) $3 hour(s) and $4 minute(s) ago.',
+					array(
+						1 => htmlspecialchars($lockUser->getRealName()),
+						2 => htmlspecialchars($lockUser->getUserName()),
+						3 => $timeDiff['hours'],
+						4 => $timeDiff['minutes']
+					)
+				);
 			} else {
-				$lockInfo = $translator->trans('The article has been locked by $1 ($2) $3 minute(s) ago.',
-				htmlspecialchars($lockUser->getRealName()),
-				htmlspecialchars($lockUser->getUserName()),
-				$timeDiff['minutes']);
+				$lockInfo = $translator->trans(
+					'The article has been locked by $1 ($2) $3 minute(s) ago.',
+					array(
+						1 => htmlspecialchars($lockUser->getRealName()),
+						2 => htmlspecialchars($lockUser->getUserName()),
+						3 =>  $timeDiff['minutes']
+					)
+				);
 			}
 			if ($article->getLockedByUser() != $g_user->getUserId()) {
 				$lockHighlight = true;
