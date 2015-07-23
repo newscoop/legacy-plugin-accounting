@@ -16,12 +16,12 @@
     <small id="exportHelp" data-original-title="" title="" class="button-help">(?)</small>
     <label>
         <button id="exportSelect" class="button"><?php
-            echo $translator->trans('button_export_selected', array(), 'plugin_accounting');
+            echo $translator->trans('Export selected rows', array(), 'plugin_accounting');
         ?></button>
     </label>
     <label>
         <button id="exportAll" class="button"><?php
-            echo $translator->trans('button_export_all', array(), 'plugin_accounting');
+            echo $translator->trans('Export all rows', array(), 'plugin_accounting');
         ?></button>
     </label>
 </fieldset>
@@ -42,9 +42,9 @@ function popover(target, content) {
 };
 
 popover($('#exportHelp'), '<?php
-    echo $translator->trans('export_help_line1', array(), 'plugin_accounting');
+    echo $translator->trans('<i>Export all rows</i>: exports all rows (including all pages) returned by the filter action.', array(), 'plugin_accounting');
     echo '<br>';
-    echo $translator->trans('export_help_line2', array(), 'plugin_accounting');
+    echo $translator->trans('<i>Export selected rows</i>: exports only rows of which the checkbox has been selected.', array(), 'plugin_accounting');
  ?>');
 
 $(document).ready(function() {
@@ -60,7 +60,7 @@ $(document).ready(function() {
             var rows = table.find('tr.selected').find('td.id').find('input:checkbox[name!=""]');
 
             if (rows.length == 0) {
-                alert('<?php echo $translator->trans('button_export_selected_error', array(), 'plugin_accounting'); ?>');
+                alert('<?php echo $translator->trans('Please make a selection of rows to continue or use the export all button!', array(), 'plugin_accounting'); ?>');
                 return false;
             }
 

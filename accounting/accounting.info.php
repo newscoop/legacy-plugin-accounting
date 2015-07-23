@@ -2,7 +2,7 @@
 
 $info = array(
     'name' => 'accounting',
-    'version' => '0.10.0',
+    'version' => '0.11.0',
     'label' => 'accounting',
     'description' => 'This plugin provides the accounting widget.',
     'menu' => array(
@@ -15,7 +15,7 @@ $info = array(
     ),
     'localizer' => array(
         'id' => 'plugin_accounting',
-        'path' => '/plugins/accounting/admin-files/accounting/*/*',
+        'path' => '/plugins/accounting/admin-files/translations/*',
         'screen_name' => 'accounting'
     ),
     'no_menu_scripts' => array(
