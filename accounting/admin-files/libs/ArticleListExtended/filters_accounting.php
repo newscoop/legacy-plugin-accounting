@@ -9,7 +9,6 @@
 require_once $GLOBALS['g_campsiteDir'] . '/classes/Author.php';
 
 $translator = \Zend_Registry::get('container')->getService('translator');
-
 ?>
 <div class="filters">
 <fieldset class="filters"><legend><?php echo $translator->trans('Filter', array(), 'library'); ?></legend>
@@ -228,7 +227,7 @@ $('input.select2').each(function() {
 
     // Default processors
     var idProcessor  = function (data) { return data.id; };
-    var resultFormatProcessor = function (data) { return data.name };
+    var resultFormatProcessor = function (data) { return data.name; };
     var selectionFormatProcessor = function (data) { return data.name; };
     var paramProcessor = function (term, page) { return { term: term, limit: 20 }; };
     var resultsProcessor = function (data, page) { return {results: data}; };
@@ -243,7 +242,9 @@ $('input.select2').each(function() {
         case 'filter_topic':
             break;
         case 'filter_author':
-            idProcessor  = function (data) { return data.name; };
+            idProcessor  = function (data) { return data.title; };
+            resultFormatProcessor = function (data) { return data.title; };
+            selectionFormatProcessor = function (data) { return data.title; };
             break;
         default:
             break;
